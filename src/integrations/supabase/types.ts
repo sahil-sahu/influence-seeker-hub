@@ -9,13 +9,159 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      favorites: {
+        Row: {
+          created_at: string
+          id: string
+          influencer_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          influencer_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          influencer_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "favorites_influencer_id_fkey"
+            columns: ["influencer_id"]
+            isOneToOne: false
+            referencedRelation: "influencers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      influencers: {
+        Row: {
+          avatar_url: string | null
+          bio: string | null
+          categories: string[]
+          created_at: string
+          engagement_rate: number
+          follower_count: number
+          id: string
+          instagram_followers: number | null
+          languages: string[] | null
+          location: string | null
+          name: string
+          platforms: string[]
+          rate_per_post: number | null
+          tiktok_followers: number | null
+          twitter_followers: number | null
+          updated_at: string
+          username: string
+          verified: boolean | null
+          weekly_posts: number | null
+          youtube_followers: number | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          bio?: string | null
+          categories?: string[]
+          created_at?: string
+          engagement_rate?: number
+          follower_count?: number
+          id?: string
+          instagram_followers?: number | null
+          languages?: string[] | null
+          location?: string | null
+          name: string
+          platforms?: string[]
+          rate_per_post?: number | null
+          tiktok_followers?: number | null
+          twitter_followers?: number | null
+          updated_at?: string
+          username: string
+          verified?: boolean | null
+          weekly_posts?: number | null
+          youtube_followers?: number | null
+        }
+        Update: {
+          avatar_url?: string | null
+          bio?: string | null
+          categories?: string[]
+          created_at?: string
+          engagement_rate?: number
+          follower_count?: number
+          id?: string
+          instagram_followers?: number | null
+          languages?: string[] | null
+          location?: string | null
+          name?: string
+          platforms?: string[]
+          rate_per_post?: number | null
+          tiktok_followers?: number | null
+          twitter_followers?: number | null
+          updated_at?: string
+          username?: string
+          verified?: boolean | null
+          weekly_posts?: number | null
+          youtube_followers?: number | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          email: string | null
+          full_name: string | null
+          id: string
+          role: string | null
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id: string
+          role?: string | null
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          role?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      search_influencers_nl: {
+        Args: { search_query: string; max_budget?: number }
+        Returns: {
+          id: string
+          name: string
+          username: string
+          bio: string
+          avatar_url: string
+          follower_count: number
+          engagement_rate: number
+          location: string
+          languages: string[]
+          platforms: string[]
+          categories: string[]
+          weekly_posts: number
+          rate_per_post: number
+          verified: boolean
+          relevance_score: number
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
