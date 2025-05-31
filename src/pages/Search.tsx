@@ -1,6 +1,6 @@
-
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -38,6 +38,7 @@ interface InfluencerResult {
 }
 
 const Search = () => {
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [maxBudget, setMaxBudget] = useState<number | null>(null);
   const [searchTriggered, setSearchTriggered] = useState(false);
@@ -367,7 +368,11 @@ const Search = () => {
                             <p className="font-semibold">{influencer.engagement_rate}%</p>
                           </div>
                         </div>
-                        <Button className="w-full" size="sm">
+                        <Button 
+                          className="w-full" 
+                          size="sm"
+                          onClick={() => navigate(`/influencer/${influencer.id}`)}
+                        >
                           View Profile
                         </Button>
                       </CardContent>
@@ -453,7 +458,12 @@ const Search = () => {
                           </div>
                         </div>
 
-                        <Button className="w-full" size="sm" variant="outline">
+                        <Button 
+                          className="w-full" 
+                          size="sm" 
+                          variant="outline"
+                          onClick={() => navigate(`/influencer/${influencer.id}`)}
+                        >
                           View Profile
                         </Button>
                       </CardContent>
