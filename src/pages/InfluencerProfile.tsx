@@ -1,4 +1,3 @@
-
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
@@ -8,11 +7,22 @@ import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
 import { Progress } from '@/components/ui/progress';
-import { ArrowLeft, MapPin, Instagram, Youtube, TrendingUp, Users, Heart, MessageCircle, Bookmark, Verified, Award, Shield, Target, Zap } from 'lucide-react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogTrigger } from '@/components/ui/dialog';
+import { Textarea } from '@/components/ui/textarea';
+import { ArrowLeft, MapPin, Instagram, Youtube, TrendingUp, Users, Heart, MessageCircle, Bookmark, Verified, Award, Shield, Target, Zap, Phone } from 'lucide-react';
+import { useState } from 'react';
+import { useToast } from '@/components/ui/use-toast';
+import { makeOutreachCall, createAssistant } from '@/lib/vapi';
+import { Input } from '@/components/ui/input';
 
 const InfluencerProfile = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { toast } = useToast();
+  const [requirements, setRequirements] = useState('');
+  const [testPhone, setTestPhone] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [email, setEmail] = useState('sahilku2003+snr@gmail.com');
 
   const { data: influencer, isLoading } = useQuery({
     queryKey: ['influencer', id],
@@ -27,6 +37,57 @@ const InfluencerProfile = () => {
       return data;
     },
   });
+
+  const handleOutreach = async () => {
+    setIsSubmitting(true);
+    try {
+      if (!email) {
+        toast({
+          title: "Error",
+          description: "Please enter your email address.",
+          variant: "destructive",
+        });
+        return;
+      }
+      
+      // Create a new assistant
+      const assistantId = await createAssistant(email);
+      
+      toast({
+        title: "Success",
+        description: "Check your email for the outreach form link!",
+      });
+    } catch (error: any) {
+      let errorMessage = "Failed to set up outreach. Please try again.";
+      
+      if (error.response) {
+        switch (error.response.status) {
+          case 401:
+            errorMessage = "Authentication failed. Please check your API keys.";
+            break;
+          case 400:
+            errorMessage = error.response.data?.message || "Invalid request parameters.";
+            break;
+          case 429:
+            errorMessage = "Too many requests. Please try again later.";
+            break;
+          case 500:
+            errorMessage = "Server error. Please try again later.";
+            break;
+        }
+      } else if (error.request) {
+        errorMessage = "Network error. Please check your connection.";
+      }
+
+      toast({
+        title: "Outreach Failed",
+        description: errorMessage,
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   if (isLoading) {
     return <div className="flex justify-center items-center min-h-screen">Loading...</div>;
@@ -57,7 +118,35 @@ const InfluencerProfile = () => {
           </Button>
           <div className="flex gap-2">
             <Button variant="outline">Follow Creator</Button>
-            <Button>Initiate Outreach</Button>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button>Initiate Outreach</Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Contact {influencer.name}</DialogTitle>
+                </DialogHeader>
+                <div className="space-y-4 py-4">
+                  <p className="text-sm text-gray-600">
+                    Enter your email address to receive the outreach form link.
+                  </p>
+                  <Input
+                    type="email"
+                    placeholder="Enter your email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+                <DialogFooter>
+                  <Button 
+                    onClick={handleOutreach} 
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? 'Setting up...' : 'Set Up Outreach'}
+                  </Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
       </div>
