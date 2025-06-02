@@ -1,73 +1,82 @@
-# Welcome to your Lovable project
+# Influence Seeker Hub
 
-## Project info
+A modern web application for managing AI-powered outreach calls to influencers using VAPI.ai integration. This platform streamlines the process of connecting brands with influencers through automated, intelligent phone calls.
 
-**URL**: https://lovable.dev/projects/b12b8a3d-84f6-4b5a-bd77-6ef4f291d65d
+## Features
 
-## How can I edit this code?
+- AI-powered outreach calls using VAPI.ai
+- Automated email notifications
+- Custom voice assistant configuration
+- Real-time call management
+- Secure handling of sensitive information
 
-There are several ways of editing your application.
+## Tech Stack
 
-**Use Lovable**
+- **Frontend Framework**: React with TypeScript
+- **Build Tool**: Vite
+- **API Integration**: 
+  - VAPI.ai for AI voice calls
+  - Mailgun for email notifications
+- **Environment Management**: dotenv
+- **HTTP Client**: Axios
+- **Voice AI Features**:
+  - GPT-4 for conversation intelligence
+  - Deepgram for transcription
+  - Custom voice models (VAPI)
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/b12b8a3d-84f6-4b5a-bd77-6ef4f291d65d) and start prompting.
+## Environment Variables
 
-Changes made via Lovable will be committed automatically to this repo.
+The following environment variables are required:
 
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```env
+VITE_VAPI_API_KEY=your_vapi_api_key
+VITE_MAILGUN_API_KEY=your_mailgun_api_key
+VITE_MAILGUN_DOMAIN=your_mailgun_domain
 ```
 
-**Edit a file directly in GitHub**
+## Getting Started
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Set up environment variables
+4. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-**Use GitHub Codespaces**
+## Project Structure
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+- `src/lib/vapi.ts` - VAPI.ai integration and assistant configuration
+- `src/components/` - React components
+- `src/pages/` - Application pages and routes
 
-## What technologies are used for this project?
+## Contributing
 
-This project is built with:
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## License
 
-## How can I deploy this project?
+MIT License
 
-Simply open [Lovable](https://lovable.dev/projects/b12b8a3d-84f6-4b5a-bd77-6ef4f291d65d) and click on Share -> Publish.
+Copyright (c) 2024 Influence Seeker Hub
 
-## Can I connect a custom domain to my Lovable project?
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-Yes, you can!
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
