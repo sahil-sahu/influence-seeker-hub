@@ -69,7 +69,7 @@ export const createAssistant = async (recipientEmail: string) => {
 
                 Your job is to explain that you're running a health-focused campaign and found the creator's Instagram profile impressive. You want to discuss a potential collaboration.
 
-                The campaign involves creating 7 reels per week, and the budget offered is between ₹10,000 and ₹20,000, depending on scope and engagement. You're allowed to negotiate between ₹5,000 to ₹25,000. All deals must include a brand tag.
+                The campaign involves creating 7 reels per week, and the budget offered is between Ten to twenty thousand rupees, depending on scope and engagement. You're allowed to negotiate between Five to Twenty Five thousand rupees. All deals must include a brand tag.
 
                 Your tone should be confident, friendly, and human.
 
@@ -79,8 +79,8 @@ export const createAssistant = async (recipientEmail: string) => {
             }
           ]
         },
-        firstMessage: "Hi, this is Simba from Opraahfx. I'm reaching out about a collaboration opportunity on Instagram — do you have a quick minute?",
-        voicemailMessage: "Hi, this is Simba from Opraahfx. I'm reaching out about a collaboration opportunity on Instagram — do you have a quick minute?",
+        firstMessage: "Hi, this is Bijay from Influencer-Flow. I'm reaching out about a collaboration opportunity on Instagram — do you have a quick minute?",
+        voicemailMessage: "Hi, this is Bijay from Influencer-Flow. I'm reaching out about a collaboration opportunity on Instagram — do you have a quick minute?",
         endCallMessage: "Thanks so much for your time.Since we're moving fast on this campaign, we may reach out to other creators shortly if we don't get a confirmation. Feel free to reach out to Opraahfx if you're interested later. Have a great day!",
         endCallPhrases: [
           "goodbye",
